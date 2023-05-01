@@ -1,0 +1,115 @@
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{% static 'ico/ms-icon-144x144.png' %}">
+  <meta name="theme-color" content="#ffffff">
+  <title>{% block title %}Mini Carros{% endblock title %}</title>
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
+</head>
+
+<body class="d-flex flex-column h-100">
+
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/mini.png' %}" width="30"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'listar_clientes' %}">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'listar_carros' %}">Carros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'listar_alugueis' %}">Alugueis</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-3 align-items-center">
+            {% if user.is_authenticated %}
+                <span class="nav-text">
+                    {{user.username}}
+                </span>
+                <a class="btn btn-outline-danger" href="{% url 'logout' %}">Sair</a>
+            {% else %}
+                <a class="btn btn-outline-primary" href="{% url 'login' %}">Entrar</a>
+                <a class="btn btn-success" href="{% url 'register' %}">Registrar</a>
+            {% endif %} 
+
+        </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Begin page content -->
+  <main class="flex-shrink-0">
+    {% bootstrap_messages %}
+    <div class="container my-4">
+      {% block content %}
+      <div class="p-4 p-md-5 mb-4 rounded bg-dark text-white">
+        <div class="row">
+          <div class="col-md-6 align-middle">
+            <h1 class="display-4 fst-italic"> Carros </h1>
+            <p class="lead my-3"></p>
+            <p class="lead mb-0"><a href="{% url 'realizar_aluguel' %}" class="text-white fw-bold">Alugue um carro!</a></p>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'img/mini.png' %}" class="mx-auto d-block" width="300" >
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        {% for carro in carros %}
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <h3 class="mb-0">{{carro.codigo}}</h3>
+              <div class="mb-1 text-muted">{{carro.comprar}}</div>
+              <p class="card-text mb-auto">{{carro.marca}} - {{carro.modelo}}</p>
+              <a href="{% url 'detalhar_carro' carro.pk %}" class="">Detalhes...</a>
+              <a href="{% url 'realizar_aluguel_carro' carro.pk %}" class="btn btn-primary mt-4">Alugue!</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img class="bd-placeholder-img" width="200" height="135" src="{% static 'img/civic.jpg' %}"role="img">
+              </div>
+          </div>
+        </div>
+        
+        {% endfor %}
+      </div>
+
+      {% endblock content %}
+    </div>
+  </main>
+
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">SENAC-PI</span>
+    </div>
+  </footer>
+
+  {% bootstrap_javascript %}
+</body>
+
+
+
+</html>
