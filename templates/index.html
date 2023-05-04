@@ -44,9 +44,9 @@
           </ul>
           <div class="d-flex gap-3 align-items-center">
             {% if user.is_authenticated %}
-                <span class="nav-text">
-                    {{user.username}}
-                </span>
+            <span class="fw-bold text-white me-2">{{ user.username }}</span>
+                   </span>
+                <h3 class="mb-0">{{cliente.nome}}</h3>
                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Sair</a>
             {% else %}
                 <a class="btn btn-outline-primary" href="{% url 'login' %}">Entrar</a>
@@ -102,8 +102,10 @@
   </main>
 
   <footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
+    <div class="container" >
       <span class="text-muted">SENAC-PI</span>
+      <div class="col-lg-4 text-muted">Copyright &copy; Apolo Carvalho 2023</div>
+            
     </div>
   </footer>
 

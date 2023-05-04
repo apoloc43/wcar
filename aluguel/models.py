@@ -1,19 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+
 
 # Create your models here.
 
 class Cliente(models.Model):
-
-    nome = models.CharField("Nome", max_length=100)
-    email = models.EmailField("Email")
-    cpf = models.CharField("CPF", max_length=15)
-    data_nascimento = models.DateField("Data de nascimento")
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nome = models.CharField("Nome", max_length=100,blank=True)
+    email = models.EmailField("Email",blank=True)
+    cpf = models.CharField("CPF", max_length=15,blank=True)
+    data_nascimento = models.DateField("Data de nascimento", null=True,blank=True)
+    
     def __str__(self):
-        return "{}".format(self.nome)
+            return "{}".format(self.nome)
     
     class Meta:
         verbose_name_plural = "Clientes"
+    
+
 
 class Carro(models.Model):
 

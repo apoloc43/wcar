@@ -27,7 +27,7 @@ urlpatterns = [
     path('carro/deletar/<int:pk>', deletar_carro, name='deletar_carro'),
     path('cliente/', listar_clientes, name='listar_clientes'),
     path('cliente/<int:pk>', detalhar_cliente, name='detalhar_cliente'),
-    path('carros/<int:pk>', detalhar_carro, name='detalhar_carro'),
+    path('carros/<str:pk>', detalhar_carro, name='detalhar_carro'),
     path('carros/aluguel/<int:carro_pk>', realizar_aluguel_carro, name='realizar_aluguel_carro' ),
     path('aluguel/add', realizar_aluguel, name='realizar_aluguel'),
 ]

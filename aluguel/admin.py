@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth import forms
+from aluguel.forms import ClienteForm
 from .models import Carro,Cliente,Aluguel
 # Register your models here.
 admin.site.register(Carro)
@@ -13,7 +14,7 @@ admin.site.register(Cliente)
 class CustomUserCreationForm(forms.UserCreationForm):
     class Meta(forms.UserCreationForm.Meta):
         model = User
-        fields = forms.UserCreationForm.Meta.fields + ('email','first_name','last_name',)
+        fields = forms.UserCreationForm.Meta.fields +('email','first_name','last_name',)
         
     def __init__(self, *args, **kwargs): # Adiciona 
         super().__init__(*args, **kwargs)  

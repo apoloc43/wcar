@@ -10,9 +10,12 @@
         <h3 class="mb-0">{{carro.marca}}</h3>
         <div class="mb-1 text-muted">{{carro.modelo}}</div>
         <p class="card-text mb-auto">{{carro.placa}} - {{carro.modelo}}</p>
-         <a href="{% url 'detalhar_carro' carro.pk %}" class="btn btn-primary mt-4">Detalhes</a>
+         <a href="{% url 'detalhar_carro' carro.pk %}" class="btn btn-primary mt-2">Detalhes</a>
+         <br>
       </div>
-      
+    </div>
+    <div class="btn-group">
+      <a href="{% url 'cadastrar_carro'%}" class="btn btn-danger">Cadastrar</a>
     </div>
   </div>
   
